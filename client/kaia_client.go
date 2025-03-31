@@ -352,7 +352,7 @@ func (ec *Client) CodeAt(ctx context.Context, account common.Address, blockNumbe
 // The block number can be nil, in which case the nonce is taken from the latest known block.
 func (ec *Client) NonceAt(ctx context.Context, account common.Address, blockNumber *big.Int) (uint64, error) {
 	var result hexutil.Uint64
-	err := ec.c.CallContext(ctx, &result, "kaia_getTransactionCount", account, toBlockNumArg(blockNumber))
+	err := ec.c.CallContext(ctx, &result, "eth_getTransactionCount", account, toBlockNumArg(blockNumber))
 	return uint64(result), err
 }
 
@@ -497,7 +497,7 @@ func (ec *Client) SendRawTransaction(ctx context.Context, tx *types.Transaction)
 	if err != nil {
 		return common.Hash{}, err
 	}
-	if err := ec.c.CallContext(ctx, &hex, "kaia_sendRawTransaction", hexutil.Encode(data)); err != nil {
+	if err := ec.c.CallContext(ctx, &hex, "eth_sendRawTransaction", hexutil.Encode(data)); err != nil {
 		return common.Hash{}, err
 	}
 	hash := common.BytesToHash(hex)
