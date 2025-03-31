@@ -245,7 +245,7 @@ func (ec *Client) TransactionInBlock(ctx context.Context, blockHash common.Hash,
 // Note that the receipt is not available for pending transactions.
 func (ec *Client) TransactionReceipt(ctx context.Context, txHash common.Hash) (*types.Receipt, error) {
 	var r *types.Receipt
-	err := ec.c.CallContext(ctx, &r, "kaia_getTransactionReceipt", txHash)
+	err := ec.c.CallContext(ctx, &r, "eth_getTransactionReceipt", txHash)
 	if err == nil {
 		if r == nil {
 			return nil, kaia.NotFound
@@ -256,7 +256,7 @@ func (ec *Client) TransactionReceipt(ctx context.Context, txHash common.Hash) (*
 
 // TransactionReceiptRpcOutput returns the receipt of a transaction by transaction hash as a rpc output.
 func (ec *Client) TransactionReceiptRpcOutput(ctx context.Context, txHash common.Hash) (r map[string]interface{}, err error) {
-	err = ec.c.CallContext(ctx, &r, "kaia_getTransactionReceipt", txHash)
+	err = ec.c.CallContext(ctx, &r, "eth_getTransactionReceipt", txHash)
 	if err == nil && r == nil {
 		return nil, kaia.NotFound
 	}

@@ -151,7 +151,7 @@ func (rb *RemoteBackend) TransactionReceipt(ctx context.Context, txHash common.H
 		return nil, NoParentPeerErr
 	}
 	var r *types.Receipt
-	err := rb.rpcClient.CallContext(ctx, &r, "kaia_getTransactionReceipt", txHash)
+	err := rb.rpcClient.CallContext(ctx, &r, "eth_getTransactionReceipt", txHash)
 	if err == nil && r == nil {
 		return nil, kaia.NotFound
 	}
@@ -163,7 +163,7 @@ func (rb *RemoteBackend) TransactionReceiptRpcOutput(ctx context.Context, txHash
 		return nil, NoParentPeerErr
 	}
 
-	err = rb.rpcClient.CallContext(ctx, &r, "kaia_getTransactionReceipt", txHash)
+	err = rb.rpcClient.CallContext(ctx, &r, "eth_getTransactionReceipt", txHash)
 	if err == nil && r == nil {
 		return nil, kaia.NotFound
 	}
