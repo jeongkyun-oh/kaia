@@ -599,7 +599,7 @@ func toSendTxArgs(msg api.SendTxArgs) interface{} {
 // BlockNumber can get the latest block number.
 func (ec *Client) BlockNumber(ctx context.Context) (*big.Int, error) {
 	var result hexutil.Big
-	err := ec.c.CallContext(ctx, &result, "kaia_blockNumber")
+	err := ec.c.CallContext(ctx, &result, "eth_blockNumber")
 	return (*big.Int)(&result), err
 }
 
